@@ -1,6 +1,8 @@
 #!groovy
 pipeline {
-    agent any
+    agent {
+        label "${DITTO_BUILD_NODE}"
+    }
     parameters {
         string(name: 'EXTRA_MAVEN_ARGS', defaultValue: '', description: 'Additional maven arguments.')
         booleanParam(name: 'SKIP_SONAR_SCAN', defaultValue: false, description: 'Set to true to skip Sonarqube Scan.')
@@ -33,7 +35,13 @@ pipeline {
             }
         }
         stage('Build') {
-            agent any
+            agent {
+                docker {
+                    args "${DITTO_DOCKER_ARGUMENTS}"
+                    image "${DITTO_DOCKER_IMAGE_MAVEN_JDK_17}"
+                    reuseNode true
+                }
+            }
             steps {
                 configFileProvider([configFile(fileId: 'mvn-bdc-settings', variable: 'MVN_SETTINGS')]) {
                     sh "mvn -s $MVN_SETTINGS clean deploy javadoc:jar source:jar " +
@@ -50,7 +58,13 @@ pipeline {
             }
         }
         stage('SonarQube Scan') {
-            agent any
+            agent {
+                docker {
+                    args "${DITTO_DOCKER_ARGUMENTS}"
+                    image "${DITTO_DOCKER_IMAGE_MAVEN_JDK_17}"
+                    reuseNode true
+                }
+            }
             when {
                 expression {
                     return !params.SKIP_SONAR_SCAN
