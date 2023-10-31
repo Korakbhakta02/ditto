@@ -1,7 +1,7 @@
 #!groovy
 pipeline {
     agent {
-        label "\$(DITTO_BUILD_NODE)"
+        label "\$DITTO_BUILD_NODE"
     }
     parameters {
         string(name: 'EXTRA_MAVEN_ARGS', defaultValue: '', description: 'Additional maven arguments.')
@@ -37,8 +37,8 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    args "\$(DITTO_DOCKER_ARGUMENTS)"
-                    image "\$(DITTO_DOCKER_IMAGE_MAVEN_JDK_17)"
+                    args "\$DITTO_DOCKER_ARGUMENTS"
+                    image "\$DITTO_DOCKER_IMAGE_MAVEN_JDK_17"
                     reuseNode true
                 }
             }
@@ -60,8 +60,8 @@ pipeline {
         stage('SonarQube Scan') {
             agent {
                 docker {
-                    args "\$(DITTO_DOCKER_ARGUMENTS)"
-                    image "\$(DITTO_DOCKER_IMAGE_MAVEN_JDK_17)"
+                    args "\$DITTO_DOCKER_ARGUMENTS"
+                    image "\$DITTO_DOCKER_IMAGE_MAVEN_JDK_17"
                     reuseNode true
                 }
             }
