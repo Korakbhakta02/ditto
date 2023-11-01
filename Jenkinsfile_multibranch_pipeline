@@ -36,7 +36,7 @@ pipeline {
             agent {
                 docker {
                     args "\$DITTO_DOCKER_ARGUMENTS"
-                    image "maven:3.8.4-openjdk-17"
+                    image "maven:3.8.4"
                     reuseNode true
                 }
             }
@@ -59,7 +59,7 @@ pipeline {
             agent {
                 docker {
                     args "\$DITTO_DOCKER_ARGUMENTS"
-                    image "maven:3.8.4-openjdk-17"
+                    image "maven:3.8.4"
                     reuseNode true
                 }
             }
