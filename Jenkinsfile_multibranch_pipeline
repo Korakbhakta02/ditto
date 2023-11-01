@@ -1,7 +1,7 @@
 #!groovy
 pipeline {
     agent {
-        label "\$DITTO_BUILD_NODE"
+        label any
     }
     parameters {
         string(name: 'EXTRA_MAVEN_ARGS', defaultValue: '', description: 'Additional maven arguments.')
