@@ -1,8 +1,6 @@
 #!groovy
 pipeline {
-    agent {
-        label any
-    }
+    agent any
     parameters {
         string(name: 'EXTRA_MAVEN_ARGS', defaultValue: '', description: 'Additional maven arguments.')
         booleanParam(name: 'SKIP_SONAR_SCAN', defaultValue: false, description: 'Set to true to skip Sonarqube Scan.')
