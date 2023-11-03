@@ -42,7 +42,7 @@ pipeline {
             }
             steps {
                 
-                    sh "mvn -s $MVN_SETTINGS clean deploy javadoc:jar source:jar " +
+                    sh "mvn  clean deploy javadoc:jar source:jar " +
                                "-T1C --batch-mode --errors " +
                                "-Pditto " +
                                "-Drevision=${theVersion} " +
