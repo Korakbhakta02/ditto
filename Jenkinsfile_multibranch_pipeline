@@ -51,7 +51,7 @@ pipeline {
             }
             post {
                 always {
-                    junit allowEmptyResults: true, "**/test-reports/*.xml","**/**/target/surefire-reports/*.xml,**/**/**/target/surefire-reports/*.xml,**/**/**/target/failsafe-reports/*.xml,**/**/target/failsafe-reports/*.xml"
+                    junit allowEmptyResults: true, "**/test-reports/*.xml,**/**/target/surefire-reports/*.xml,**/**/**/target/surefire-reports/*.xml,**/**/**/target/failsafe-reports/*.xml,**/**/target/failsafe-reports/*.xml"
                 }
             }
         }
