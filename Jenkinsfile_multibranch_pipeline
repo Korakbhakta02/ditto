@@ -35,7 +35,7 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    args "--privileged --userns=host"
+                    args "--privileged -u root"
                     image "maven:3.8.4-openjdk-17"
                     reuseNode true
                 }
@@ -58,7 +58,7 @@ pipeline {
         stage('SonarQube Scan') {
             agent {
                 docker {
-                    args "--privileged --userns=host"
+                    args "--privileged -u root"
                     image "maven:3.8.4-openjdk-17"
                     reuseNode true
                 }
