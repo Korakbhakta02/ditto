@@ -36,7 +36,7 @@ pipeline {
             agent {
                 docker {
                     args "--privileged --userns=host"
-                    image "maven:3.8.4"
+                    image "maven:3.8.4-openjdk-17"
                     reuseNode true
                 }
             }
@@ -59,7 +59,7 @@ pipeline {
             agent {
                 docker {
                     args "--privileged --userns=host"
-                    image "maven:3.8.4"
+                    image "maven:3.8.4-openjdk-17"
                     reuseNode true
                 }
             }
