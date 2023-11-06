@@ -25,7 +25,7 @@ pipeline {
                 }
             }
             steps {
-                configFileProvider([configFile(fileId: 'repo.eclipse.org', variable: 'MVN_SETTINGS')]) {
+                configFileProvider([configFile(fileId: 'mvn-bdc-settings', variable: 'MVN_SETTINGS')]) {
                     sh "mvn -s $MVN_SETTINGS clean deploy source:jar -T1C --batch-mode --errors -Pbuild-documentation,ditto -Drevision=${theVersion}"
                 }
             }
