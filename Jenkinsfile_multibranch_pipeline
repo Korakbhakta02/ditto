@@ -7,7 +7,7 @@ pipeline {
         theVersion = "0-${theBranch}-SNAPSHOT"
         theMvnRepo = "$WORKSPACE/../feature-repository-${theBranch}"
         JAVA_TOOL_OPTIONS = '-Duser.home=/home/jenkins-slave'
-        MVN_SETTINGS='repo.eclipse.org'
+        MVN_SETTINGS=configFile('mvn_bdc_settings')
     }
     stages {
         stage('Checkout scm') {
