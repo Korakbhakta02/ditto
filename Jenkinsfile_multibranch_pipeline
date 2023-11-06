@@ -20,7 +20,7 @@ pipeline {
             agent {
                 docker {
                     args '-v /home/jenkins-slave/.m2:/home/jenkins-slave/.m2:z --cpus=4 -u root'
-                    image 'thingsdev.azurecr.io/things-pipeline/maven-jdk-11:latest'
+                    image 'maven:3.8.4-openjdk-17'
                 }
             }
             steps {
@@ -33,7 +33,7 @@ pipeline {
             agent {
                 docker {
                     args '-v /home/jenkins-slave/.m2:/home/jenkins-slave/.m2:z -u root'
-                    image 'thingsdev.azurecr.io/things-pipeline/maven-jdk-11:latest'
+                    image 'maven:3.8.4-openjdk-17'
                 }
             }
             steps {
