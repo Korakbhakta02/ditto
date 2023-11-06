@@ -10,9 +10,7 @@ pipeline {
     }
     stages {
         stage('Checkout scm') {
-            agent {
-                label 'docker-slave'
-            }
+            agent any
             steps {
                 echo 'Checkout scm'
                 checkout scm
