@@ -5,8 +5,8 @@ pipeline {
         // Need to replace the '%2F' used by Jenkins to deal with / in the path (e.g. story/...)
         theBranch = "${env.BRANCH_NAME}".replace("%2F", "-").replace("/", "-")
         theVersion = "0-${theBranch}-SNAPSHOT"
-        theMvnRepo = "$WORKSPACE/../feature-repository-${theBranch}";
-        JAVA_TOOL_OPTIONS = '-Duser.home=/home/jenkins-slave',
+        theMvnRepo = "$WORKSPACE/../feature-repository-${theBranch}"
+        JAVA_TOOL_OPTIONS = '-Duser.home=/home/jenkins-slave'
         MVN_SETTINGS='repo.eclipse.org'
     }
     stages {
