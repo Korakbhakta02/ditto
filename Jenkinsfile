@@ -25,10 +25,21 @@ pipeline {
             }
             steps {
                
-                    sh "mvn clean install -T1C --batch-mode --errors -Pbuild-documentation,ditto -Drevision=${theVersion}"
+                    sh "mvn clean install -DskipTests -T1C --batch-mode --errors -Pbuild-documentation,ditto -Drevision=${theVersion}"
+                    sh "./build-images.sh"
+                    
                 }
             
         }
+        stage('Deploy') {
+            steps {
+                // Start Docker Compose in /deployment/docker directory
+                dir('../deployment/docker/') {
+                    sh 'docker-compose up -d'
+                }
+            }
+        }
+    
         stage('SonarQube Scan') {
             agent {
                 docker {
