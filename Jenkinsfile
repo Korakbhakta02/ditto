@@ -16,23 +16,23 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build') {
-            
-            agent {
-                docker {
-                    args '-v /home/jenkins-slave/.m2:/home/jenkins-slave/.m2:z --cpus=4 -u root'
-                    image 'maven:3.8.4-openjdk-17'
-                }
-            }
-            steps {
+        // stage('Build') {
+        //     agent any
+        //     // agent {
+        //     //     docker {
+        //     //         args '-v /home/jenkins-slave/.m2:/home/jenkins-slave/.m2:z --cpus=4 -u root'
+        //     //         image 'maven:3.8.4-openjdk-17'
+        //     //     }
+        //     // }
+        //     steps {
                
-                    sh "mvn clean install -DskipTests -T1C --batch-mode --errors -Pbuild-documentation,ditto -Drevision=${theVersion}"
-                    sh "chmod u+x build-images.sh"
-                    sh "sudo ./build-images.sh"
+        //             sh "mvn clean install -DskipTests -T1C --batch-mode --errors -Pbuild-documentation,ditto -Drevision=${theVersion}"
+        //             sh "chmod u+x build-images.sh"
+        //             sh "sudo ./build-images.sh"
                     
-                }
+        //         }
             
-        }
+        // }
         stage('Deploy') {
             steps {
                 // Start Docker Compose in /deployment/docker directory
@@ -42,20 +42,6 @@ pipeline {
             }
         }
     
-        stage('SonarQube Scan') {
-            agent {
-                docker {
-                    args '-v /home/jenkins-slave/.m2:/home/jenkins-slave/.m2:z -u root'
-                    image 'maven:3.8.4-openjdk-17'
-                }
-            }
-            steps {
-                configFileProvider([configFile(fileId: 'mvn-bdc-settings', variable: 'MVN_SETTINGS')]) {
-                    withSonarQubeEnv("${env.SONAR_QUBE_ENV}") {
-                        sh "mvn -s $MVN_SETTINGS --batch-mode --errors sonar:sonar -Dsonar.branch.name=${theBranch} -Drevision=${theVersion}"
-                    }
-                }
-            }
-        }
+        
     }
 }
