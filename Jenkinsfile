@@ -17,16 +17,17 @@ pipeline {
             }
         }
         stage('Build') {
-            agent {
-                docker {
-                    args '-v /home/jenkins-slave/.m2:/home/jenkins-slave/.m2:z --cpus=4 -u root'
-                    image 'maven:3.8.4-openjdk-17'
-                }
+            agent any
+            // agent {
+            //     docker {
+            //         args '-v /home/jenkins-slave/.m2:/home/jenkins-slave/.m2:z --cpus=4 -u root'
+            //         image 'maven:3.8.4-openjdk-17'
+            //     }
             }
             steps {
                
                     // sh "mvn clean install -DskipTests -T1C --batch-mode --errors -Pbuild-documentation,ditto -Drevision=${theVersion}"
-                    sh "sudo build-images.sh"
+                    sh "sudo ./build-images.sh"
                     
                 }
             
