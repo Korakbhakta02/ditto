@@ -32,8 +32,9 @@ pipeline {
             
         }
         stage('clean build') {
-            dir('../lexiditto@2/') {
+           
             steps {
+                 dir('../lexiditto@2/') {
                 sh "chmod u+x build-images.sh"
                 sh "./build-images.sh"
                 }
