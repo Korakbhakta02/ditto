@@ -36,7 +36,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Start Docker Compose in /deployment/docker directory
-                dir('../korak2/deployment/docker/') {
+                dir('../lexi/deployment/docker/') {
                     sh "cp dev.env .env"
                     sh 'docker-compose up -d'
                 }
