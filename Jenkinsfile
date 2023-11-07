@@ -27,12 +27,17 @@ pipeline {
             steps {
                
                     sh "mvn clean install -DskipTests -T1C --batch-mode --errors -Pbuild-documentation,ditto -Drevision=${theVersion}"
-                    sh "chmod u+x build-images.sh"
-                    sh "./build-images.sh"
-                    
+                   
                 }
             
         }
+        stage('Dclean build') {
+            steps {
+                sh "chmod u+x build-images.sh"
+                sh "./build-images.sh"
+                }
+            }
+        
         stage('Deploy') {
             steps {
                 // Start Docker Compose in /deployment/docker directory
