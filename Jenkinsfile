@@ -5,7 +5,7 @@ pipeline {
         // Need to replace the '%2F' used by Jenkins to deal with / in the path (e.g. story/...)
         theBranch = "${env.BRANCH_NAME}".replace("%2F", "-").replace("/", "-")
         theVersion = "0-${theBranch}-SNAPSHOT"
-        theMvnRepo = "$WORKSPACE/../feature-repository-${theBranch}"
+        theMvnRepo = "$WORKSPACE/../ditto-repo-${theBranch}"
         JAVA_TOOL_OPTIONS = '-Duser.home=/home/jenkins-slave'
     }
     stages {
@@ -24,10 +24,10 @@ pipeline {
                 }
             }
             steps {
-                configFileProvider([configFile(fileId: 'mvn-bdc-settings', variable: 'MVN_SETTINGS')]) {
-                    sh "mvn -s $MVN_SETTINGS clean install -T1C --batch-mode --errors -Pbuild-documentation,ditto -Drevision=${theVersion}"
+               
+                    sh "mvn clean install -T1C --batch-mode --errors -Pbuild-documentation,ditto -Drevision=${theVersion}"
                 }
-            }
+            
         }
         stage('SonarQube Scan') {
             agent {
