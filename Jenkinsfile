@@ -26,12 +26,12 @@ pipeline {
             }
             steps {
                
-                    sh "mvn clean install -DskipTests -T1C --batch-mode --errors -Pbuild-documentation,ditto -Drevision=${theVersion}"
+                    sh "mvn clean install -DskipTests"
                    
                 }
             
         }
-        stage('Dclean build') {
+        stage('clean build') {
             steps {
                 sh "chmod u+x build-images.sh"
                 sh "./build-images.sh"
