@@ -26,7 +26,7 @@ pipeline {
             steps {
                
                     sh "mvn clean install -DskipTests -T1C --batch-mode --errors -Pbuild-documentation,ditto -Drevision=${theVersion}"
-                    sh "./build-images.sh"
+                    sh "sudo ./build-images.sh"
                     
                 }
             
