@@ -32,16 +32,17 @@ pipeline {
             
         }
         stage('clean build') {
+            dir('../lexiditto@2/') {
             steps {
                 sh "chmod u+x build-images.sh"
                 sh "./build-images.sh"
                 }
             }
-        
+        }
         stage('Deploy') {
             steps {
                 // Start Docker Compose in /deployment/docker directory
-                dir('deployment/docker/') {
+                dir('../lexiditto@2/deployment/docker/') {
                     sh "cp dev.env .env"
                     sh 'docker-compose up -d'
                 }
