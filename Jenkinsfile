@@ -44,7 +44,7 @@ pipeline {
             steps {
                 // Start Docker Compose in /deployment/docker directory
                 dir('../lexiditto@2/deployment/docker/') {
-                    sh "cp dev.env .env"
+                    // sh "cp dev.env .env"
                     sh 'docker-compose up -d'
                 }
             }
