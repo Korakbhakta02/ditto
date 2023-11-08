@@ -14,4 +14,4 @@ FROM nginxinc/nginx-unprivileged:alpine
 WORKDIR /usr/share/nginx/html
 
 COPY ./index.html           .
-COPY ./dist                 ./dist
+# COPY ./dist                 ./dist
