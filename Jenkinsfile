@@ -37,14 +37,14 @@ pipeline {
             steps {
                  dir('./') {
                 sh "chmod u+x build-images.sh"
-                sh "sh build-images.sh"
+                sh "./build-images.sh"
                 }
             }
         }
         stage('Deploy') {
             steps {
                 // Start Docker Compose in /deployment/docker directory
-                dir('deployment/docker/') {
+                dir('./deployment/docker/') {
                     sh "cp dev.env .env"
                     sh 'docker-compose up -d'
                 }
