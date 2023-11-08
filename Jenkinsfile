@@ -35,7 +35,7 @@ pipeline {
         stage('clean build') {
            
             steps {
-                 dir('./') {
+                 dir('../pipeline@2/') {
                 sh "chmod u+x build-images.sh"
                 sh "./build-images.sh"
                 }
@@ -44,7 +44,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Start Docker Compose in /deployment/docker directory
-                dir('./deployment/docker/') {
+                dir('../pipeline@2/deployment/docker/') {
                     sh "cp dev.env .env"
                     sh 'docker-compose up -d'
                 }
