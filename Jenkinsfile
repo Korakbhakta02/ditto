@@ -3,6 +3,7 @@ pipeline {
     agent any
     environment {
         // Need to replace the '%2F' used by Jenkins to deal with / in the path (e.g. story/...)
+        BRANCH_NAME="main"
         theBranch = "${env.BRANCH_NAME}".replace("%2F", "-").replace("/", "-")
         theVersion = "0-${theBranch}-SNAPSHOT"
         theMvnRepo = "$WORKSPACE/../ditto-repo-${theBranch}"
@@ -34,16 +35,16 @@ pipeline {
         stage('clean build') {
            
             steps {
-                 dir('../lexiditto@2/') {
+                 dir('../../') {
                 sh "chmod u+x build-images.sh"
-                sh "./build-images.sh"
+                sh "sh build-images.sh"
                 }
             }
         }
         stage('Deploy') {
             steps {
                 // Start Docker Compose in /deployment/docker directory
-                dir('../lexiditto@2/deployment/docker/') {
+                dir('../../deployment/docker/') {
                     // sh "cp dev.env .env"
                     sh 'docker-compose up -d'
                 }
