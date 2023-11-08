@@ -45,7 +45,7 @@ pipeline {
             steps {
                 // Start Docker Compose in /deployment/docker directory
                 dir('../../deployment/docker/') {
-                    // sh "cp dev.env .env"
+                    sh "cp dev.env .env"
                     sh 'docker-compose up -d'
                 }
             }
